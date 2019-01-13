@@ -13,3 +13,4 @@ Example:
         return sourceData.count
    }
  ```
+![emptyscreendemo](https://user-images.githubusercontent.com/17447252/51089041-ba4d5000-178c-11e9-8922-689efa0cd42c.png)
