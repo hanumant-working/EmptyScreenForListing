@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/*
 extension UITableView {
     func setEmptyMessage(message:String, emptyImage: UIImage, buttonTitle: String? = nil) {
         let emptyView = EmptyView(image: emptyImage, message: message, buttonTitle: buttonTitle)
@@ -17,4 +18,4 @@ extension UITableView {
         self.separatorStyle = .none
     }
 }
-
+*/

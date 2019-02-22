@@ -14,6 +14,7 @@ class EmptyView: UIView {
     @IBOutlet weak var lblMessage: UILabel!
     @IBOutlet weak var btnEmpty: UIButton!
     
+    weak var emptyViewDelegate: EmptyViewDelegate?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,11 +30,10 @@ class EmptyView: UIView {
         setup()
     }
 
-    convenience init(image: UIImage, message: String, buttonTitle: String? = nil) {
+    convenience init(image: UIImage? = nil, message: String, buttonTitle: String? = nil) {
         self.init()
     
         lblMessage.text = message
-        imgView.image = image
         
         // Hide button when button is nil
         if buttonTitle != nil {
@@ -42,6 +42,14 @@ class EmptyView: UIView {
         } else {
             btnEmpty.isHidden = true
         }
+        
+        if image != nil {
+            imgView.image = image
+        } else {
+            imgView.image = nil
+            imgView.isHidden = true
+        }
+        
     }
     
     private func setup() {
@@ -61,8 +69,22 @@ class EmptyView: UIView {
     }
     
     @objc func btnEmptyTapped() {
-    
+        emptyViewDelegate?.emptyViewButtonTapped()
     }
 
 
+}
+
+protocol EmptyViewDelegate: AnyObject {
+    func emptyViewButtonTapped()
+}
+
+
+extension UITableView {
+    func setEmptyMessage(message:String, emptyImage: UIImage, buttonTitle: String? = nil) {
+        let emptyView = EmptyView(image: emptyImage, message: message, buttonTitle: buttonTitle)
+        emptyView.frame = self.bounds
+        self.backgroundView = emptyView
+        self.separatorStyle = .none
+    }
 }
